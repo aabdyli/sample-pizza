@@ -63,6 +63,15 @@ export function CartProvider(props) {
     window.localStorage.setItem("cartContent", JSON.stringify(cartItems));
   };
 
+  const removeFromCart = id => {
+    setArticles(articles => articles.filter(article => article.id !== id));
+  };
+
+  const clearCart = () => {
+    setArticles([]);
+    window.localStorage.setItem("cartContent", JSON.stringify([]));
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -71,6 +80,8 @@ export function CartProvider(props) {
         articles,
         total,
         addToCart,
+        removeFromCart,
+        clearCart,
         changeQuantity
       }}
     >
